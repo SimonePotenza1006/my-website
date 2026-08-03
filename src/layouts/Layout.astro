@@ -8,6 +8,11 @@ interface Props {
 }
 
 const { title, description } = Astro.props;
+
+// In sviluppo l'intro riparte a ogni refresh: è l'unico modo per lavorarci
+// sopra senza svuotare lo storage a mano. In produzione resta una volta per
+// sessione, con `?intro` per forzarla quando la vuoi mostrare a qualcuno.
+const replayIntro = import.meta.env.DEV;
 ---
 
 <!doctype html>
@@ -30,10 +35,20 @@ const { title, description } = Astro.props;
       nascosta finché non compare la classe. Senza JavaScript si atterra
       direttamente sul sito.
     -->
-    <script is:inline>
+    <script is:inline define:vars={{ replayIntro }}>
       (() => {
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!sessionStorage.getItem('intro-seen') && !reduced) {
+        if (reduced) return;
+
+        const forced = replayIntro || new URLSearchParams(location.search).has('intro');
+        let seen = false;
+        try {
+          seen = !!sessionStorage.getItem('intro-seen');
+        } catch {
+          // Storage negato: l'intro va in scena comunque.
+        }
+
+        if (forced || !seen) {
           document.documentElement.classList.add('intro-active');
         }
       })();
