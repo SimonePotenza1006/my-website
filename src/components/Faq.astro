@@ -7,22 +7,22 @@ import { questions } from '../data/faq';
   da tastiera senza una riga di JavaScript, e funziona anche se lo script non
   arriva mai.
 -->
-<section id="domande" class="mx-auto max-w-6xl border-t border-mist py-20 md:py-28">
-  <h2 class="font-mono text-xs tracking-[0.24em] text-olive uppercase" data-appear>Domande</h2>
+<section id="domande" class="mx-auto max-w-6xl border-t border-line py-20 md:py-28">
+  <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase" data-appear>Domande</h2>
 
-  <div class="mt-12 border-t border-mist">
+  <div class="mt-12 border-t border-line">
     {
       questions.map((item, index) => (
         <details
-          class="group border-b border-mist"
+          class="group border-b border-line"
           data-appear
           style={`--appear-delay: ${index * 60}ms`}
         >
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 font-display text-xl font-bold tracking-tight transition group-hover:text-olive md:text-2xl">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 font-display text-xl font-bold tracking-tight transition group-hover:text-muted md:text-2xl">
             {item.q}
             <span
               aria-hidden="true"
-              class="shrink-0 text-olive transition-transform duration-300 group-open:rotate-45"
+              class="shrink-0 text-muted transition-transform duration-300 group-open:rotate-45"
             >
               <svg viewBox="0 0 24 24" width="22" height="22">
                 <path
@@ -35,7 +35,7 @@ import { questions } from '../data/faq';
               </svg>
             </span>
           </summary>
-          <p class="max-w-2xl pb-7 leading-relaxed text-olive">{item.a}</p>
+          <p class="max-w-2xl pb-7 leading-relaxed text-muted">{item.a}</p>
         </details>
       ))
     }

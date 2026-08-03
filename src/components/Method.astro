@@ -21,20 +21,20 @@ const steps = [
   Numerare qui ha senso: sono fasi in sequenza, l'ordine è informazione e non
   decorazione. Se fossero tre servizi paralleli, i numeri sarebbero una bugia.
 -->
-<section id="metodo" class="mx-auto max-w-6xl border-t border-mist py-20 md:py-28">
-  <h2 class="font-mono text-xs tracking-[0.24em] text-olive uppercase" data-appear>Come lavoro</h2>
+<section id="metodo" class="mx-auto max-w-6xl border-t border-line py-20 md:py-28">
+  <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase" data-appear>Come lavoro</h2>
 
-  <div class="mt-12 grid gap-px overflow-hidden border border-mist bg-mist md:grid-cols-3">
+  <div class="mt-12 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-3">
     {
       steps.map((step, index) => (
         <div
-          class="flex flex-col gap-4 bg-paper p-7 md:p-9"
+          class="flex flex-col gap-4 bg-canvas p-7 md:p-9"
           data-appear
           style={`--appear-delay: ${index * 90}ms`}
         >
-          <span class="font-mono text-sm text-olive">0{index + 1}</span>
+          <span class="font-mono text-sm text-muted">0{index + 1}</span>
           <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{step.title}</h3>
-          <p class="leading-relaxed text-olive">{step.body}</p>
+          <p class="leading-relaxed text-muted">{step.body}</p>
         </div>
       ))
     }

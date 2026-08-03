@@ -3,6 +3,7 @@ const links = [
   { label: 'Percorso', href: '#percorso' },
   { label: 'Lavori', href: '#lavori' },
   { label: 'Come lavoro', href: '#metodo' },
+  { label: 'Servizi', href: '#servizi' },
   { label: 'Domande', href: '#domande' },
 ];
 ---
@@ -13,7 +14,7 @@ const links = [
   resta raggiungibile senza doverla duplicare.
 -->
 <nav
-  class="sticky top-0 z-30 -mx-6 border-y border-mist bg-paper/90 backdrop-blur md:-mx-12"
+  class="sticky top-0 z-30 -mx-6 border-y border-line bg-canvas/90 backdrop-blur md:-mx-12"
   aria-label="Sezioni"
 >
   <div
@@ -24,7 +25,7 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="shrink-0 font-mono text-[11px] tracking-[0.18em] text-olive uppercase underline-offset-4 transition hover:text-earth hover:underline"
+            class="shrink-0 font-mono text-[11px] tracking-[0.18em] text-muted uppercase underline-offset-4 transition hover:text-fg hover:underline"
           >
             {link.label}
           </a>
@@ -34,7 +35,7 @@ const links = [
 
     <a
       href="#contatti"
-      class="shrink-0 rounded-full border border-earth px-4 py-1.5 font-mono text-[11px] tracking-[0.18em] text-earth uppercase transition hover:bg-earth hover:text-paper"
+      class="shrink-0 rounded-full border border-fg px-4 py-1.5 font-mono text-[11px] tracking-[0.18em] text-fg uppercase transition hover:bg-fg hover:text-canvas"
     >
       Parliamone
     </a>

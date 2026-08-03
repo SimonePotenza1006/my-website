@@ -1,0 +1,108 @@
+---
+/**
+ * TODO: i prezzi sono da decidere tu. Ho lasciato dei segnaposto invece di
+ * inventare cifre: un listino sbagliato in pagina costa più di un listino
+ * assente, perché ti vincola in trattativa prima ancora di parlare.
+ */
+const tiers = [
+  {
+    name: 'Sito vetrina',
+    price: '€ —',
+    note: 'da definire',
+    lead: 'Per farsi trovare e capire in trenta secondi.',
+    includes: [
+      'Fino a cinque pagine',
+      'Disegno su misura, non un tema',
+      'Ottimizzazione per la ricerca',
+      'Messa online e dominio',
+    ],
+  },
+  {
+    name: 'Prodotto su misura',
+    price: '€ —',
+    note: 'da definire',
+    lead: 'Gestionali e applicazioni con utenti veri dietro.',
+    includes: [
+      'Interfaccia e back end insieme',
+      'Base dati e autenticazione',
+      'API pensata per chi la consuma',
+      'Rilascio continuo',
+    ],
+    featured: true,
+  },
+  {
+    name: 'Su misura completa',
+    price: 'Parliamone',
+    note: 'preventivo dedicato',
+    lead: 'Quando serve anche il mobile, o il progetto è già avviato.',
+    includes: [
+      'Web e app in Flutter',
+      'Recupero di codice esistente',
+      'Affiancamento al tuo team',
+      'Manutenzione continuativa',
+    ],
+  },
+];
+---
+
+<section id="servizi" class="mx-auto max-w-6xl border-t border-line py-20 md:py-28">
+  <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase" data-appear>Servizi</h2>
+
+  <p
+    class="mt-6 max-w-2xl font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] font-bold tracking-tight text-balance"
+    data-appear
+    style="--appear-delay: 80ms"
+  >
+    Tre modi di lavorare insieme.
+  </p>
+
+  <div class="mt-12 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-3">
+    {
+      tiers.map((tier, index) => (
+        <div
+          class:list={[
+            'flex flex-col gap-6 p-7 md:p-9',
+            tier.featured ? 'bg-line/40' : 'bg-canvas',
+          ]}
+          data-appear
+          style={`--appear-delay: ${index * 90}ms`}
+        >
+          <div>
+            <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{tier.name}</h3>
+            <p class="mt-2 text-muted">{tier.lead}</p>
+          </div>
+
+          <p class="flex items-baseline gap-2">
+            <span class="font-display text-3xl font-extrabold tracking-tight">{tier.price}</span>
+            <span class="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">
+              {tier.note}
+            </span>
+          </p>
+
+          <ul class="flex flex-col gap-2 border-t border-line pt-5">
+            {tier.includes.map((item) => (
+              <li class="flex gap-2.5 text-sm leading-relaxed text-muted">
+                <span aria-hidden="true" class="text-fg">
+                  —
+                </span>
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <a
+            href="#contatti"
+            class:list={[
+              'mt-auto rounded-full px-5 py-2.5 text-center font-medium transition',
+              tier.featured
+                ? 'bg-fg text-canvas hover:bg-muted'
+                : 'border border-line text-fg hover:border-fg',
+            ]}
+          >
+            Parliamone
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</section>

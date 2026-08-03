@@ -5,20 +5,20 @@
 @import "@fontsource-variable/geist-mono";
 
 @theme {
-  /* Cinque colori, dal più scuro al più chiaro. Palette desaturata e calda:
-     senza un accento acceso, il contrasto lo porta la tipografia. */
-  --color-earth: #2f2504; /* testo */
-  --color-olive: #594e36; /* testo secondario, link, pulsanti */
-  --color-sage: #7e846b; /* segni decorativi, tipografia cubitale */
-  --color-mist: #a5ae9e; /* bordi e divisori */
-  --color-paper: #d0ddd7; /* fondo pagina */
+  /* Fondo carbone e testo quasi bianco: nessun accento cromatico, il colore
+     lo portano le immagini dei lavori e il contrasto lo porta la tipografia. */
+  --color-canvas: #0e0e10; /* fondo pagina */
+  --color-fg: #fafaf9; /* testo */
+  --color-muted: #a0a0a3; /* testo secondario */
+  --color-faint: #6b6b6e; /* segni decorativi, solo testo grande */
+  --color-line: #26262a; /* bordi e divisori */
 
   --font-display: "Bricolage Grotesque Variable", "Geist Variable", sans-serif;
   --font-sans: "Geist Variable", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 
   /* La stanza buia dell'intro: fuori palette, è il buio attorno a un telefono. */
-  --color-room: #1b1a14;
+  --color-room: #08080a;
 
   /* --- Chat dell'intro ----------------------------------------------------
      Fuori palette di proposito: dentro la cornice c'è un telefono vero, non
@@ -44,19 +44,19 @@ body {
 
 body {
   margin: 0;
-  background: var(--color-paper);
-  color: var(--color-earth);
+  background: var(--color-canvas);
+  color: var(--color-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-earth);
-  color: var(--color-paper);
+  background: var(--color-fg);
+  color: var(--color-canvas);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-olive);
+  outline: 2px solid var(--color-muted);
   outline-offset: 3px;
 }
 

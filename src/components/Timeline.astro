@@ -2,8 +2,8 @@
 import { milestones } from '../data/timeline';
 ---
 
-<section id="percorso" class="mx-auto max-w-6xl border-t border-mist py-20 md:py-28">
-  <h2 class="font-mono text-xs tracking-[0.24em] text-olive uppercase" data-appear>Il percorso</h2>
+<section id="percorso" class="mx-auto max-w-6xl border-t border-line py-20 md:py-28">
+  <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase" data-appear>Il percorso</h2>
 
   <!--
     Gli anni restano a sinistra e il testo scorre a destra: la colonna delle
@@ -14,16 +14,16 @@ import { milestones } from '../data/timeline';
     {
       milestones.map((milestone, index) => (
         <li
-          class="grid gap-3 border-b border-mist py-8 last:border-b-0 md:grid-cols-[8rem_1fr] md:gap-12"
+          class="grid gap-3 border-b border-line py-8 last:border-b-0 md:grid-cols-[8rem_1fr] md:gap-12"
           data-appear
           style={`--appear-delay: ${index * 70}ms`}
         >
-          <span class="font-mono text-sm tracking-widest text-olive">{milestone.year}</span>
+          <span class="font-mono text-sm tracking-widest text-muted">{milestone.year}</span>
           <div>
             <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">
               {milestone.title}
             </h3>
-            <p class="mt-2 max-w-2xl leading-relaxed text-olive">{milestone.body}</p>
+            <p class="mt-2 max-w-2xl leading-relaxed text-muted">{milestone.body}</p>
           </div>
         </li>
       ))

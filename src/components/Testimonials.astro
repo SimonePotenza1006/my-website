@@ -1,0 +1,51 @@
+---
+/**
+ * TODO: sostituire con citazioni reali, autorizzate dalle persone che le hanno
+ * dette. I segnaposto qui sotto sono dichiaratamente vuoti: una testimonianza
+ * inventata è una recensione falsa, e se qualcuno la verifica il danno è
+ * peggiore di non avere affatto la sezione.
+ */
+const quotes = [
+  { author: '[Nome cognome]', role: '[Ruolo, azienda]', body: '[Cosa ha detto davvero]' },
+  { author: '[Nome cognome]', role: '[Ruolo, azienda]', body: '[Cosa ha detto davvero]' },
+  { author: '[Nome cognome]', role: '[Ruolo, azienda]', body: '[Cosa ha detto davvero]' },
+];
+---
+
+<section id="dicono" class="border-t border-line py-20 md:py-28">
+  <div class="mx-auto max-w-6xl px-0">
+    <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase" data-appear>
+      Cosa dicono
+    </h2>
+  </div>
+
+  <!--
+    Scorrimento orizzontale nativo con agganci: nessuna libreria di caroselli,
+    e resta usabile con la rotella, con il dito e con la tastiera.
+  -->
+  <div
+    class="thin-scroll mt-12 flex snap-x snap-mandatory gap-px overflow-x-auto bg-line pb-px"
+    data-appear
+    style="--appear-delay: 80ms"
+  >
+    {
+      quotes.map((quote) => (
+        <figure class="flex w-[85vw] shrink-0 snap-start flex-col justify-between gap-8 bg-canvas p-7 sm:w-[46vw] md:w-[32vw] md:p-9">
+          <blockquote class="font-display text-xl leading-[1.3] font-bold tracking-tight text-balance md:text-2xl">
+            {quote.body}
+          </blockquote>
+          <figcaption>
+            <p class="text-fg">{quote.author}</p>
+            <p class="font-mono text-[11px] tracking-[0.16em] text-muted uppercase">{quote.role}</p>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+
+  <div class="mx-auto mt-6 max-w-6xl">
+    <p class="font-mono text-[11px] tracking-wider text-muted">
+      Sezione da riempire con citazioni reali e autorizzate.
+    </p>
+  </div>
+</section>
