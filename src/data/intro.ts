@@ -29,30 +29,30 @@ export const script: IntroMessage[] = [
     from: 'me',
     kind: 'text',
     text: 'Mi serve una mano, conosci qualche sviluppatore?',
-    pause: 600,
+    pause: 720,
   },
   {
     from: 'them',
     kind: 'text',
     text: 'Ti sei convinto a fare il sito web per la tua casa vacanze? 👀',
-    pause: 1300,
+    pause: 1550,
   },
   {
     from: 'me',
     kind: 'text',
     text: 'Ahahahahahahah quella arriverà un giorno, ma ho avuto un’idea per un’applicazione mobile e voglio parlarne con un professionista!',
-    pause: 1100,
+    pause: 1300,
   },
-  { from: 'them', kind: 'text', text: 'Allora conosco la persona perfetta!', pause: 1300 },
-  { from: 'them', kind: 'link', pause: 1000 },
+  { from: 'them', kind: 'text', text: 'Allora conosco la persona perfetta!', pause: 1550 },
+  { from: 'them', kind: 'link', pause: 1200 },
   {
     from: 'them',
     kind: 'text',
     text: 'Dagli un colpo di telefono, magari ti sistema anche per il sito 😂',
-    pause: 1200,
+    pause: 1420,
   },
-  { from: 'me', kind: 'text', text: 'Grazie mille, vedo subito!', pause: 900 },
+  { from: 'me', kind: 'text', text: 'Grazie mille, vedo subito!', pause: 1060 },
 ];
 
 /** Respiro tra una bolla e l'inizio della successiva. */
-export const GAP = 280;
+export const GAP = 320;

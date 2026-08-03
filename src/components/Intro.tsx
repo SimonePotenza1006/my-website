@@ -281,10 +281,11 @@ function Bubble({ message, index, tail, cardRef, tapped }: BubbleProps) {
     <div className={`bubble-pop flex ${mine ? 'justify-end' : 'justify-start'}`}>
       <div
         className={[
+          // Tutte le bolle di chi scrive condividono lo stesso bordo: solo la
+          // codina della prima sporge oltre, dentro il padding del contenitore.
           'relative max-w-[80%] rounded-lg px-2.5 py-1.5 text-[14.5px] leading-[20px] text-chat-text shadow-sm',
           mine ? 'bg-chat-out' : 'bg-chat-in',
           tail && (mine ? 'bubble-out rounded-tr-none' : 'bubble-in rounded-tl-none'),
-          !tail && (mine ? 'mr-2' : 'ml-2'),
         ]
           .filter(Boolean)
           .join(' ')}
