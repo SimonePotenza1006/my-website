@@ -144,8 +144,7 @@ export default function Intro() {
         <div
           className="absolute inset-0 opacity-70"
           style={{
-            background:
-              'radial-gradient(60% 50% at 50% 42%, #12494a 0%, transparent 70%)',
+            background: 'radial-gradient(60% 50% at 50% 42%, #594e36 0%, transparent 70%)',
           }}
         />
       </div>
@@ -179,7 +178,7 @@ export default function Intro() {
       <button
         type="button"
         onClick={finish}
-        className="absolute top-5 right-5 rounded-full border border-bone/20 bg-ink/60 px-4 py-2 font-mono text-xs tracking-wide text-bone/70 backdrop-blur transition hover:border-mint/60 hover:text-mint md:top-7 md:right-7"
+        className="absolute top-5 right-5 rounded-full border border-paper/25 bg-ink/60 px-4 py-2 font-mono text-xs tracking-wide text-paper/70 backdrop-blur transition hover:border-paper hover:text-paper md:top-7 md:right-7"
       >
         Salta l’intro
       </button>
@@ -188,7 +187,7 @@ export default function Intro() {
       {origin && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-canvas"
+          className="pointer-events-none absolute inset-0 bg-paper"
           style={{
             clipPath: revealing
               ? `circle(${origin.r}px at ${origin.x}px ${origin.y}px)`
@@ -312,19 +311,29 @@ function LinkPreview({
 }) {
   return (
     <div ref={cardRef} className="relative mb-1 w-[230px] overflow-hidden rounded-md bg-black/5">
-      <div className="relative flex h-[112px] items-end justify-between overflow-hidden bg-canvas p-3">
+      <div className="relative flex h-[112px] flex-col justify-center overflow-hidden bg-ink px-3.5">
         <div
-          className="absolute inset-0 opacity-80"
+          className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(120% 90% at 15% 0%, #12494a 0%, transparent 60%), linear-gradient(160deg, #0b2426 0%, #06181a 100%)',
+              'radial-gradient(70% 65% at 76% 70%, #594e36 0%, transparent 72%), linear-gradient(150deg, #594e36 0%, #2f2504 60%)',
           }}
         />
-        <span className="relative font-display text-[26px] leading-none font-extrabold tracking-tight text-bone">
-          SP
+        {/* Poggia sul bordo inferiore, come un ritaglio incollato sulla card */}
+        <img
+          src="/simone-preview.png"
+          alt=""
+          width={420}
+          height={469}
+          className="pointer-events-none absolute right-2 bottom-0 h-[104px] w-auto"
+        />
+        <span className="relative font-display text-[19px] leading-[1.05] font-extrabold tracking-tight text-paper">
+          Simone
+          <br />
+          Potenza
         </span>
-        <span className="relative font-mono text-[10px] tracking-widest text-mint uppercase">
-          portfolio
+        <span className="relative mt-1.5 font-mono text-[8.5px] tracking-[0.18em] text-mist uppercase">
+          Full stack
         </span>
       </div>
 
@@ -339,7 +348,9 @@ function LinkPreview({
       {tapped && (
         <span
           aria-hidden="true"
-          className="tap-ring pointer-events-none absolute top-1/2 left-1/2 block size-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-mint/40"
+          // Il cerchio attraversa sia il fondo scuro sia la parte bianca della
+          // card: la salvia si vede su entrambi, un bianco o un nero no.
+          className="tap-ring pointer-events-none absolute top-1/2 left-1/2 block size-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sage/50"
         />
       )}
     </div>

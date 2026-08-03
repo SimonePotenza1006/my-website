@@ -6,24 +6,22 @@
 
 @theme {
   /* --- Sito ---------------------------------------------------------------
-     Petrolio profondo con carattere caldo: la stanza buia in cui lo schermo
-     del telefono dell'intro fa da unica fonte di luce. */
-  --color-ink: #06181a; /* fondo più profondo: footer, scocca del telefono */
-  --color-canvas: #0b2426; /* fondo pagina */
-  --color-surface: #0f2f31; /* schede, blocchi */
-  --color-line: #1c4446; /* bordi sottili */
-  --color-bone: #ede7da; /* testo principale */
-  --color-muted: #8aa5a0; /* testo secondario */
-  --color-coral: #ff6b4a; /* accento, usato con parsimonia */
-  --color-mint: #7ce0c0; /* link e stati attivi */
+     Cinque colori, cinque nomi: dal più scuro al più chiaro. La palette è
+     terrosa e desaturata, quindi il contrasto lo porta la tipografia, non
+     un accento acceso. */
+  --color-ink: #2f2504; /* testo e superfici più profonde */
+  --color-bark: #594e36; /* testo secondario, pulsanti, link */
+  --color-sage: #7e846b; /* segni terziari, etichette */
+  --color-mist: #a5ae9e; /* bordi e divisori */
+  --color-paper: #d0ddd7; /* fondo pagina */
 
   --font-display: "Bricolage Grotesque Variable", "Geist Variable", sans-serif;
   --font-sans: "Geist Variable", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 
   /* --- Chat dell'intro ----------------------------------------------------
-     Restano su tema chiaro anche quando il sito è scuro: uno schermo acceso
-     dentro una scena buia. */
+     Fuori dalla palette di proposito: dentro la cornice c'è un telefono vero,
+     non il sito. Confonderli toglierebbe l'effetto al taglio di scena. */
   --color-chat-bg: #eae6df;
   --color-chat-panel: #f0f2f5;
   --color-chat-in: #ffffff;
@@ -41,19 +39,19 @@ body {
 
 body {
   margin: 0;
-  background: var(--color-canvas);
-  color: var(--color-bone);
+  background: var(--color-paper);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-coral);
-  color: var(--color-ink);
+  background: var(--color-ink);
+  color: var(--color-paper);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-mint);
+  outline: 2px solid var(--color-ink);
   outline-offset: 3px;
 }
 
