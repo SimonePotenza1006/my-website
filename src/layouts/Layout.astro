@@ -1,27 +1,47 @@
 ---
+import Intro from '../components/Intro';
 import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b2426" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <title>{title}</title>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+    <!--
+      Deve girare prima del primo paint, quindi resta inline e non bundled.
+      È questo script a decidere se l'intro va in scena: il CSS la tiene
+      nascosta finché non compare la classe. Senza JavaScript si atterra
+      direttamente sul sito.
+    -->
+    <script is:inline>
+      (() => {
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!sessionStorage.getItem('intro-seen') && !reduced) {
+          document.documentElement.classList.add('intro-active');
+        }
+      })();
+    </script>
+  </head>
+
+  <body>
+    <Intro client:load />
+    <slot />
+  </body>
+</html>

@@ -1,11 +1,188 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// TODO: contenuti da sostituire con i tuoi dati reali.
+const stack = [
+  {
+    layer: 'Interfaccia',
+    role: 'quello che si vede',
+    tools: ['TypeScript', 'React', 'Astro', 'Tailwind', 'Flutter'],
+  },
+  {
+    layer: 'Logica e dati',
+    role: 'quello che decide',
+    tools: ['Node.js', 'API REST', 'PostgreSQL', 'Autenticazione'],
+  },
+  {
+    layer: 'Infrastruttura',
+    role: 'quello che regge',
+    tools: ['Git', 'Docker', 'CI/CD', 'Deploy continuo'],
+  },
+];
+
+const projects = [
+  {
+    name: 'Critical Table',
+    year: '2024',
+    kind: 'Back end · Web · Mobile',
+    description:
+      'Strumento per sessioni di gioco di ruolo da tavolo, portato avanti su tre codebase che parlano la stessa API.',
+  },
+  {
+    name: 'Linda',
+    year: '2025',
+    kind: 'App mobile',
+    description:
+      'Pulizia della galleria fotografica. Nata da un problema mio: dodicimila foto e nessuna voglia di scorrerle.',
+  },
+  {
+    name: 'Listino Prezzi',
+    year: '2025',
+    kind: 'Gestionale su misura',
+    description:
+      'Un gestionale piccolo ma reale, costruito perché un’attività smettesse di lavorare a fogli di calcolo.',
+  },
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Simone Potenza — Full stack developer"
+  description="Front end, back end e tutto quello che sta in mezzo. Portfolio di Simone Potenza, full stack developer."
+>
+  <header
+    class="reveal sticky top-0 z-20 flex items-center justify-between border-b border-line/60 bg-canvas/80 px-6 py-4 backdrop-blur md:px-12"
+  >
+    <span class="font-mono text-xs tracking-[0.2em] text-muted uppercase">Simone Potenza</span>
+    <a
+      href="#contatti"
+      class="font-mono text-xs tracking-[0.2em] text-mint uppercase transition hover:text-coral"
+    >
+      Scrivimi
+    </a>
+  </header>
+
+  <main class="px-6 md:px-12">
+    <!-- Il sito riprende esattamente la frase con cui è stato consigliato. -->
+    <section class="mx-auto flex min-h-[78vh] max-w-6xl flex-col justify-center py-20">
+      <p
+        class="reveal font-mono text-xs tracking-[0.24em] text-coral uppercase"
+        style="--reveal-delay: 80ms"
+      >
+        Full stack developer
+      </p>
+
+      <h1
+        class="reveal mt-6 max-w-4xl font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.98] font-extrabold tracking-tight text-balance"
+        style="--reveal-delay: 160ms"
+      >
+        Front end, back end, e tutto quello che sta in mezzo.
+      </h1>
+
+      <p
+        class="reveal mt-8 max-w-xl text-lg leading-relaxed text-muted"
+        style="--reveal-delay: 260ms"
+      >
+        Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
+        tiene in piedi. Di solito la parte difficile è farli combaciare.
+      </p>
+
+      <div class="reveal mt-10 flex flex-wrap gap-3" style="--reveal-delay: 340ms">
+        <a
+          href="#progetti"
+          class="rounded-full bg-coral px-6 py-3 font-medium text-ink transition hover:bg-bone"
+        >
+          Guarda i progetti
+        </a>
+        <a
+          href="#contatti"
+          class="rounded-full border border-line px-6 py-3 font-medium text-bone transition hover:border-mint hover:text-mint"
+        >
+          Parliamone
+        </a>
+      </div>
+    </section>
+
+    <!--
+      Le competenze sono impilate come lo stack vero: dall'alto ciò che si
+      vede, in fondo ciò che regge il peso. L'ordine è informazione.
+    -->
+    <section class="mx-auto max-w-6xl border-t border-line py-20">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase">Lo stack</h2>
+
+      <div class="mt-10 flex flex-col">
+        {
+          stack.map((level) => (
+            <div class="grid gap-4 border-b border-line py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
+              <div>
+                <h3 class="font-display text-3xl font-bold tracking-tight md:text-4xl">
+                  {level.layer}
+                </h3>
+                <p class="mt-1 text-sm text-muted">{level.role}</p>
+              </div>
+              <ul class="flex flex-wrap items-start gap-2 self-center">
+                {level.tools.map((tool) => (
+                  <li class="rounded-full border border-line px-4 py-1.5 font-mono text-sm text-bone/90">
+                    {tool}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="progetti" class="mx-auto max-w-6xl border-t border-line py-20">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase">Progetti</h2>
+
+      <div class="mt-10 flex flex-col">
+        {
+          projects.map((project) => (
+            <article class="group grid gap-3 border-b border-line py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
+              <div>
+                <h3 class="font-display text-3xl font-bold tracking-tight transition group-hover:text-mint md:text-4xl">
+                  {project.name}
+                </h3>
+                <p class="mt-1 font-mono text-xs tracking-wider text-muted uppercase">
+                  {project.year} · {project.kind}
+                </p>
+              </div>
+              <p class="max-w-2xl self-center text-lg leading-relaxed text-muted">
+                {project.description}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="contatti" class="mx-auto max-w-6xl border-t border-line py-20">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-muted uppercase">Contatti</h2>
+
+      <p class="mt-8 max-w-2xl font-display text-3xl leading-tight font-bold text-balance md:text-5xl">
+        Se stai cercando qualcuno che ti costruisca la cosa intera, scrivimi.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+        <a
+          href="mailto:simonepotenzatr@gmail.com"
+          class="text-lg text-mint underline-offset-4 transition hover:text-coral hover:underline"
+        >
+          simonepotenzatr@gmail.com
+        </a>
+        <a
+          href="https://github.com/SimonePotenza1006"
+          class="text-lg text-mint underline-offset-4 transition hover:text-coral hover:underline"
+        >
+          GitHub
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line px-6 py-10 md:px-12">
+    <p class="mx-auto max-w-6xl font-mono text-xs tracking-wider text-muted">
+      Costruito con Astro. Nessun cookie, nessun tracciamento.
+    </p>
+  </footer>
 </Layout>
