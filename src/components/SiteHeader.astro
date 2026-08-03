@@ -7,32 +7,36 @@ const links = [
 ];
 ---
 
-<header
-  class="fixed inset-x-0 top-0 z-30 border-b border-mist/70 bg-paper/85 backdrop-blur"
+<!--
+  La barra sta sotto il nome, incassata fra due righe sottili. È sticky, non
+  fixed: parte da lì e si aggancia in cima solo quando la si supera, così
+  resta raggiungibile senza doverla duplicare.
+-->
+<nav
+  class="sticky top-0 z-30 -mx-6 border-y border-mist bg-paper/90 backdrop-blur md:-mx-12"
+  aria-label="Sezioni"
 >
-  <div class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4 md:px-12">
-    <a href="#top" class="font-mono text-xs tracking-[0.2em] text-earth uppercase">
-      Simone Potenza
-    </a>
-
-    <nav class="hidden items-center gap-7 md:flex" aria-label="Sezioni">
+  <div
+    class="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-3 md:px-12"
+  >
+    <div class="flex items-center gap-6 overflow-x-auto md:gap-8">
       {
         links.map((link) => (
           <a
             href={link.href}
-            class="font-mono text-xs tracking-[0.16em] text-olive uppercase underline-offset-4 transition hover:underline"
+            class="shrink-0 font-mono text-[11px] tracking-[0.18em] text-olive uppercase underline-offset-4 transition hover:text-earth hover:underline"
           >
             {link.label}
           </a>
         ))
       }
-    </nav>
+    </div>
 
     <a
       href="#contatti"
-      class="rounded-full border border-earth px-4 py-2 font-mono text-xs tracking-[0.16em] text-earth uppercase transition hover:bg-earth hover:text-paper"
+      class="shrink-0 rounded-full border border-earth px-4 py-1.5 font-mono text-[11px] tracking-[0.18em] text-earth uppercase transition hover:bg-earth hover:text-paper"
     >
       Parliamone
     </a>
   </div>
-</header>
+</nav>

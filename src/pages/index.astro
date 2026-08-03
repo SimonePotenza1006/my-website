@@ -18,9 +18,29 @@ const PHOTO = { src: '/simone-hero.webp', width: 840, height: 941 };
   description="Front end, back end e tutto quello che sta in mezzo. Portfolio di Simone Potenza, full stack developer: percorso, lavori e come lavoro."
 >
   <span id="top"></span>
-  <SiteHeader />
 
   <main class="px-6 md:px-12">
+    <!--
+      Il nome apre la pagina a piena larghezza, la barra si incassa subito
+      sotto, la foto occupa il resto della schermata.
+
+      La barra è figlia diretta di <main>: un elemento sticky si aggancia solo
+      dentro il proprio contenitore, quindi chiuderla in un blocco alto quanto
+      lei la renderebbe inutile appena si scorre.
+    -->
+    <div class="reveal mx-auto w-full max-w-6xl pt-8 md:pt-10" style="--reveal-delay: 80ms">
+      <p class="mb-4 font-mono text-[11px] tracking-[0.24em] text-olive uppercase">
+        Full stack developer
+      </p>
+      <h1
+        class="font-display text-[clamp(2.6rem,17.5vw,13rem)] leading-[0.82] font-extrabold tracking-[-0.045em]"
+      >
+        Simone<br />Potenza
+      </h1>
+    </div>
+
+    <SiteHeader />
+
     <Hero photo={PHOTO} />
 
     <Timeline />
