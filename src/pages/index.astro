@@ -79,62 +79,67 @@ const projects = [
   </header>
 
   <main class="px-6 md:px-12">
-    <!-- Il sito riprende esattamente la frase con cui è stato consigliato. -->
-    <section
-      class="mx-auto grid min-h-[80vh] max-w-6xl items-center gap-14 py-20 md:grid-cols-[1.1fr_0.9fr] md:gap-16"
-    >
-      <div>
-        <p
-          class="reveal font-mono text-xs tracking-[0.24em] text-lime uppercase"
-          style="--reveal-delay: 80ms"
-        >
-          Full stack developer
-        </p>
-
-        <h1
-          class="reveal mt-6 font-display text-[clamp(2.4rem,5.6vw,4.6rem)] leading-[0.98] font-extrabold tracking-tight text-balance"
-          style="--reveal-delay: 160ms"
-        >
-          Front end, back end, e <span class="glow text-fuchsia">tutto quello che sta in mezzo</span
-          >.
-        </h1>
-
-        <p
-          class="reveal mt-8 max-w-xl text-lg leading-relaxed text-dim"
-          style="--reveal-delay: 260ms"
-        >
-          Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
-          tiene in piedi. Di solito la parte difficile è farli combaciare.
-        </p>
-
-        <div class="reveal mt-10 flex flex-wrap items-center gap-6" style="--reveal-delay: 340ms">
-          <a
-            href="#progetti"
-            class="rounded-full border border-line px-6 py-3 font-medium text-fg transition hover:border-cyan hover:text-cyan"
-          >
-            Guarda i progetti
-          </a>
-          <a
-            href="#contatti"
-            class="text-dim underline underline-offset-4 transition hover:text-fg"
-          >
-            Parliamone
-          </a>
-        </div>
-      </div>
-
-      <!--
-        Il pulsante sta sotto la foto, non sotto il testo: comanda l'immagine,
-        e tenerlo accanto a ciò che governa evita di doverlo spiegare.
-      -->
-      <div class="reveal justify-self-center md:justify-self-end" style="--reveal-delay: 420ms">
+    <!--
+      La hero è il ritratto e basta. La decodifica parte da sola appena
+      l'intro lascia lo schermo, quindi la scena c'è ancora anche senza un
+      pulsante da premere.
+    -->
+    <section class="mx-auto flex min-h-[90vh] max-w-6xl flex-col items-center justify-center py-14">
+      <div class="reveal w-full" style="--reveal-delay: 120ms">
         <AsciiPortrait
           client:load
           src={PORTRAIT.src}
           width={PORTRAIT.width}
           height={PORTRAIT.height}
           alt="Simone Potenza"
+          name="Simone Potenza"
+          role="Full stack developer"
         />
+      </div>
+
+      <a
+        href="#manifesto"
+        class="reveal mt-12 text-dim transition hover:text-lime"
+        aria-label="Vai al contenuto"
+        style="--reveal-delay: 520ms"
+      >
+        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <path
+            d="M12 5v14M6 13l6 6 6-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+      </a>
+    </section>
+
+    <!-- Il sito riprende esattamente la frase con cui è stato consigliato. -->
+    <section id="manifesto" class="mx-auto max-w-6xl border-t border-line py-24">
+      <p class="font-mono text-xs tracking-[0.24em] text-lime uppercase">Il mestiere</p>
+
+      <h2
+        class="mt-6 max-w-4xl font-display text-[clamp(2.2rem,5.2vw,4.4rem)] leading-[1] font-extrabold tracking-tight text-balance"
+      >
+        Front end, back end, e <span class="glow text-fuchsia">tutto quello che sta in mezzo</span>.
+      </h2>
+
+      <p class="mt-8 max-w-xl text-lg leading-relaxed text-dim">
+        Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
+        tiene in piedi. Di solito la parte difficile è farli combaciare.
+      </p>
+
+      <div class="mt-10 flex flex-wrap items-center gap-6">
+        <a
+          href="#progetti"
+          class="rounded-full border border-line px-6 py-3 font-medium text-fg transition hover:border-cyan hover:text-cyan"
+        >
+          Guarda i progetti
+        </a>
+        <a href="#contatti" class="text-dim underline underline-offset-4 transition hover:text-fg">
+          Parliamone
+        </a>
       </div>
     </section>
 
