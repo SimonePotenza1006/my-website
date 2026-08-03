@@ -1,234 +1,93 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import AsciiPortrait from '../components/AsciiPortrait';
-import ThemeToggle from '../components/ThemeToggle.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import Hero from '../components/Hero.astro';
+import Timeline from '../components/Timeline.astro';
+import Method from '../components/Method.astro';
+import Faq from '../components/Faq.astro';
+import WorkGrid from '../components/WorkGrid';
+import { projects, tags } from '../data/work';
 
-// Il ritaglio è già esportato alla misura esatta che serve (2x di 420px).
-// Passando per `import` di src/assets, Astro emetteva anche il master PNG da
-// 1,1 MB pur non servendolo a nessuno.
-const PORTRAIT = { src: '/simone-hero.webp', width: 840, height: 941 };
-
-// TODO: contenuti da sostituire con i tuoi dati reali.
-// Un accento per strato: i tre neon non sono decorazione, distinguono i piani.
-const stack = [
-  {
-    layer: 'Interfaccia',
-    role: 'quello che si vede',
-    accent: 'text-fuchsia',
-    rule: 'bg-fuchsia',
-    tools: ['TypeScript', 'React', 'Astro', 'Tailwind', 'Flutter'],
-  },
-  {
-    layer: 'Logica e dati',
-    role: 'quello che decide',
-    accent: 'text-cyan',
-    rule: 'bg-cyan',
-    tools: ['Node.js', 'API REST', 'PostgreSQL', 'Autenticazione'],
-  },
-  {
-    layer: 'Infrastruttura',
-    role: 'quello che regge',
-    accent: 'text-lime',
-    rule: 'bg-lime',
-    tools: ['Git', 'Docker', 'CI/CD', 'Deploy continuo'],
-  },
-];
-
-const projects = [
-  {
-    name: 'Critical Table',
-    year: '2024',
-    kind: 'Back end · Web · Mobile',
-    description:
-      'Strumento per sessioni di gioco di ruolo da tavolo, portato avanti su tre codebase che parlano la stessa API.',
-  },
-  {
-    name: 'Linda',
-    year: '2025',
-    kind: 'App mobile',
-    description:
-      'Pulizia della galleria fotografica. Nata da un problema mio: dodicimila foto e nessuna voglia di scorrerle.',
-  },
-  {
-    name: 'Listino Prezzi',
-    year: '2025',
-    kind: 'Gestionale su misura',
-    description:
-      'Un gestionale piccolo ma reale, costruito perché un’attività smettesse di lavorare a fogli di calcolo.',
-  },
-];
+// Il ritaglio è già esportato alla misura che serve. Passando per `import` di
+// src/assets, Astro emetteva anche il master PNG da 1,1 MB pur non servendolo.
+const PHOTO = { src: '/simone-hero.webp', width: 840, height: 941 };
 ---
 
 <Layout
   title="Simone Potenza — Full stack developer"
-  description="Front end, back end e tutto quello che sta in mezzo. Portfolio di Simone Potenza, full stack developer."
+  description="Front end, back end e tutto quello che sta in mezzo. Portfolio di Simone Potenza, full stack developer: percorso, lavori e come lavoro."
 >
-  <header
-    class="reveal sticky top-0 z-20 flex items-center justify-between border-b border-line bg-canvas/85 px-6 py-4 backdrop-blur md:px-12"
-  >
-    <span class="font-mono text-xs tracking-[0.2em] text-dim uppercase">Simone Potenza</span>
-    <div class="flex items-center gap-4">
-      <a
-        href="#contatti"
-        class="font-mono text-xs tracking-[0.2em] text-fuchsia uppercase underline-offset-4 transition hover:underline"
-      >
-        Scrivimi
-      </a>
-      <ThemeToggle />
-    </div>
-  </header>
+  <span id="top"></span>
+  <SiteHeader />
 
   <main class="px-6 md:px-12">
-    <!--
-      La hero è il ritratto e basta. La decodifica parte da sola appena
-      l'intro lascia lo schermo, quindi la scena c'è ancora anche senza un
-      pulsante da premere.
-    -->
-    <section class="mx-auto flex min-h-[90vh] max-w-6xl flex-col items-center justify-center py-14">
-      <div class="reveal w-full" style="--reveal-delay: 120ms">
-        <AsciiPortrait
-          client:load
-          src={PORTRAIT.src}
-          width={PORTRAIT.width}
-          height={PORTRAIT.height}
-          alt="Simone Potenza"
-          name="Simone Potenza"
-          role="Full stack developer"
-        />
-      </div>
+    <Hero photo={PHOTO} />
 
-      <a
-        href="#manifesto"
-        class="reveal mt-12 text-dim transition hover:text-lime"
-        aria-label="Vai al contenuto"
-        style="--reveal-delay: 520ms"
-      >
-        <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
-          <path
-            d="M12 5v14M6 13l6 6 6-6"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.6"
-            stroke-linecap="round"
-            stroke-linejoin="round"></path>
-        </svg>
-      </a>
-    </section>
+    <Timeline />
 
-    <!-- Il sito riprende esattamente la frase con cui è stato consigliato. -->
-    <section id="manifesto" class="mx-auto max-w-6xl border-t border-line py-24">
-      <p class="font-mono text-xs tracking-[0.24em] text-lime uppercase">Il mestiere</p>
-
-      <h2
-        class="mt-6 max-w-4xl font-display text-[clamp(2.2rem,5.2vw,4.4rem)] leading-[1] font-extrabold tracking-tight text-balance"
-      >
-        Front end, back end, e <span class="glow text-fuchsia">tutto quello che sta in mezzo</span>.
-      </h2>
-
-      <p class="mt-8 max-w-xl text-lg leading-relaxed text-dim">
-        Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
-        tiene in piedi. Di solito la parte difficile è farli combaciare.
-      </p>
-
-      <div class="mt-10 flex flex-wrap items-center gap-6">
-        <a
-          href="#progetti"
-          class="rounded-full border border-line px-6 py-3 font-medium text-fg transition hover:border-cyan hover:text-cyan"
-        >
-          Guarda i progetti
-        </a>
-        <a href="#contatti" class="text-dim underline underline-offset-4 transition hover:text-fg">
-          Parliamone
-        </a>
-      </div>
-    </section>
-
-    <!--
-      Le competenze sono impilate come lo stack vero: dall'alto ciò che si
-      vede, in fondo ciò che regge il peso. L'ordine è informazione, e il
-      colore distingue il piano.
-    -->
-    <section class="mx-auto max-w-6xl border-t border-line py-20">
-      <h2 class="font-mono text-xs tracking-[0.24em] text-dim uppercase">Lo stack</h2>
-
-      <div class="mt-10 flex flex-col">
-        {
-          stack.map((level) => (
-            <div class="grid gap-4 border-b border-line py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
-              <div>
-                <span class:list={['mb-4 block h-px w-16', level.rule]} />
-                <h3 class:list={['font-display text-3xl font-bold tracking-tight md:text-4xl', level.accent]}>
-                  {level.layer}
-                </h3>
-                <p class="mt-1 text-sm text-dim">{level.role}</p>
-              </div>
-              <ul class="flex flex-wrap items-start gap-2 self-center">
-                {level.tools.map((tool) => (
-                  <li class="rounded-full border border-line px-4 py-1.5 font-mono text-sm text-dim">
-                    {tool}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <section id="progetti" class="mx-auto max-w-6xl border-t border-line py-20">
-      <h2 class="font-mono text-xs tracking-[0.24em] text-dim uppercase">Progetti</h2>
-
-      <div class="mt-10 flex flex-col">
-        {
-          projects.map((project) => (
-            <article class="group grid gap-3 border-b border-line py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
-              <div>
-                <h3 class="font-display text-3xl font-bold tracking-tight transition group-hover:text-cyan md:text-4xl">
-                  {project.name}
-                </h3>
-                <p class="mt-1 font-mono text-xs tracking-wider text-dim uppercase">
-                  {project.year} · {project.kind}
-                </p>
-              </div>
-              <p class="max-w-2xl self-center text-lg leading-relaxed text-dim">
-                {project.description}
-              </p>
-            </article>
-          ))
-        }
-      </div>
-    </section>
-
-    <section id="contatti" class="mx-auto max-w-6xl border-t border-line py-20">
-      <h2 class="font-mono text-xs tracking-[0.24em] text-dim uppercase">Contatti</h2>
+    <section id="lavori" class="mx-auto max-w-6xl border-t border-mist py-20 md:py-28">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-olive uppercase" data-appear>I lavori</h2>
 
       <p
-        class="mt-8 max-w-2xl font-display text-3xl leading-tight font-bold text-balance md:text-5xl"
+        class="mt-6 max-w-2xl font-display text-[clamp(1.8rem,3.6vw,3rem)] leading-[1.05] font-bold tracking-tight text-balance"
+        data-appear
+        style="--appear-delay: 80ms"
       >
-        Se stai cercando qualcuno che ti costruisca la cosa intera, <span
-          class="glow text-cyan">scrivimi</span
-        >.
+        Prodotti interi, non pezzi di prodotto.
       </p>
 
-      <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
+      <div class="mt-12" data-appear style="--appear-delay: 160ms">
+        <WorkGrid client:visible projects={projects} tags={tags} />
+      </div>
+    </section>
+
+    <Method />
+
+    <Faq />
+
+    <section id="contatti" class="mx-auto max-w-6xl border-t border-mist py-20 md:py-28">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-olive uppercase" data-appear>Contatti</h2>
+
+      <p
+        class="mt-8 max-w-3xl font-display text-[clamp(2rem,4.6vw,3.8rem)] leading-[1.02] font-extrabold tracking-tight text-balance"
+        data-appear
+        style="--appear-delay: 80ms"
+      >
+        Se ti serve qualcuno che ti costruisca la cosa intera, scrivimi.
+      </p>
+
+      <div
+        class="mt-12 grid gap-px overflow-hidden border border-mist bg-mist sm:grid-cols-3"
+        data-appear
+        style="--appear-delay: 160ms"
+      >
         <a
           href="mailto:simonepotenzatr@gmail.com"
-          class="text-lg text-fuchsia underline underline-offset-4 transition hover:text-fg"
+          class="flex flex-col gap-2 bg-paper p-7 transition hover:bg-mist/30"
         >
-          simonepotenzatr@gmail.com
+          <span class="font-mono text-[11px] tracking-[0.2em] text-olive uppercase">Email</span>
+          <span class="text-lg break-all text-earth">simonepotenzatr@gmail.com</span>
         </a>
         <a
           href="https://github.com/SimonePotenza1006"
-          class="text-lg text-fuchsia underline underline-offset-4 transition hover:text-fg"
+          target="_blank"
+          rel="noreferrer"
+          class="flex flex-col gap-2 bg-paper p-7 transition hover:bg-mist/30"
         >
-          GitHub
+          <span class="font-mono text-[11px] tracking-[0.2em] text-olive uppercase">GitHub</span>
+          <span class="text-lg text-earth">SimonePotenza1006 ↗</span>
         </a>
+        <!-- TODO: incolla l'URL del tuo profilo LinkedIn. -->
+        <div class="flex flex-col gap-2 bg-paper p-7">
+          <span class="font-mono text-[11px] tracking-[0.2em] text-olive uppercase">LinkedIn</span>
+          <span class="text-lg text-olive">Da aggiungere</span>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="border-t border-line px-6 py-10 md:px-12">
-    <p class="mx-auto max-w-6xl font-mono text-xs tracking-wider text-dim">
+  <footer class="border-t border-mist px-6 py-10 md:px-12">
+    <p class="mx-auto max-w-6xl font-mono text-xs tracking-wider text-olive">
       Costruito con Astro. Statistiche di visita anonime, nessun cookie.
     </p>
   </footer>

@@ -1,0 +1,63 @@
+---
+interface Props {
+  photo: { src: string; width: number; height: number };
+}
+
+const { photo } = Astro.props;
+---
+
+<!--
+  Il nome fa da architettura, non da etichetta: "SIMO" a caratteri cubitali
+  regge la scena e il ritaglio ci si staglia davanti. Il taglio delle lettere
+  ai bordi è voluto — una parola che entra tutta comoda non pesa.
+-->
+<section class="relative flex min-h-[100svh] flex-col justify-between overflow-hidden px-6 pt-28 pb-8 md:px-12">
+  <div class="reveal mx-auto flex w-full max-w-6xl items-start justify-between gap-6" style="--reveal-delay: 80ms">
+    <p class="font-mono text-[11px] tracking-[0.24em] text-olive uppercase">Full stack developer</p>
+    <p class="font-mono text-[11px] tracking-[0.24em] text-olive uppercase">Italia · 2026</p>
+  </div>
+
+  <div class="relative mx-auto flex w-full max-w-6xl flex-1 items-end justify-center">
+    <span
+      aria-hidden="true"
+      class="reveal pointer-events-none absolute bottom-[8%] left-1/2 -translate-x-1/2 font-display text-[clamp(9rem,34vw,26rem)] leading-[0.72] font-extrabold tracking-[-0.06em] text-sage select-none"
+      style="--reveal-delay: 160ms"
+    >
+      SIMO
+    </span>
+
+    <img
+      src={photo.src}
+      width={photo.width}
+      height={photo.height}
+      alt="Simone Potenza"
+      fetchpriority="high"
+      class="reveal relative w-[min(78vw,440px)] [mask-image:linear-gradient(to_bottom,black_86%,transparent_100%)]"
+      style="--reveal-delay: 240ms"
+    />
+  </div>
+
+  <div
+    class="reveal mx-auto flex w-full max-w-6xl flex-col gap-6 md:flex-row md:items-end md:justify-between"
+    style="--reveal-delay: 340ms"
+  >
+    <h1 class="max-w-xl font-display text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.05] font-bold tracking-tight text-balance">
+      Front end, back end, e tutto quello che sta in mezzo.
+    </h1>
+
+    <div class="flex shrink-0 items-center gap-5">
+      <a
+        href="#contatti"
+        class="rounded-full bg-earth px-6 py-3 font-medium text-paper transition hover:bg-olive"
+      >
+        Parliamone
+      </a>
+      <a
+        href="#lavori"
+        class="font-mono text-xs tracking-[0.18em] text-olive uppercase underline-offset-4 transition hover:underline"
+      >
+        I lavori
+      </a>
+    </div>
+  </div>
+</section>

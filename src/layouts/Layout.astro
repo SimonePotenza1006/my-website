@@ -24,8 +24,7 @@ const replayIntro = import.meta.env.DEV;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#131318" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#d0ddd7" />
     <!-- Compare in un istante preciso della sceneggiatura: non deve caricarsi lì. -->
     <link rel="preload" as="image" href="/simone-preview.png" />
     <meta property="og:title" content={title} />
@@ -39,23 +38,6 @@ const replayIntro = import.meta.env.DEV;
       nascosta finché non compare la classe. Senza JavaScript si atterra
       direttamente sul sito.
     -->
-    <script is:inline>
-      // Il tema va deciso prima del primo paint, altrimenti si vede il lampo
-      // bianco prima che lo scuro entri in vigore.
-      (() => {
-        let stored = null;
-        try {
-          stored = localStorage.getItem('theme');
-        } catch {
-          // Storage negato: si segue il sistema.
-        }
-        const dark = stored
-          ? stored === 'dark'
-          : window.matchMedia('(prefers-color-scheme: dark)').matches;
-        document.documentElement.classList.toggle('dark', dark);
-      })();
-    </script>
-
     <script is:inline define:vars={{ replayIntro }}>
       (() => {
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -80,5 +62,30 @@ const replayIntro = import.meta.env.DEV;
     <Intro client:load />
     <slot />
     <Analytics />
+
+    <script>
+      // Le sezioni entrano allo scroll. L'opacità la toglie lo script, non il
+      // CSS: se questo file non arriva mai, il contenuto resta visibile invece
+      // di sparire per sempre.
+      const targets = document.querySelectorAll<HTMLElement>('[data-appear]');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if (!reduced && targets.length) {
+        targets.forEach((element) => element.classList.add('is-armed'));
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.remove('is-armed');
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -12% 0px' },
+        );
+
+        targets.forEach((element) => observer.observe(element));
+      }
+    </script>
   </body>
 </html>

@@ -1,0 +1,42 @@
+---
+// TODO: rileggi e riscrivi con come lavori davvero — questo è il metodo che
+// si deduce dai tuoi progetti, non uno che mi hai raccontato tu.
+const steps = [
+  {
+    title: 'Capire',
+    body: 'Chi userà la cosa e quali sono i due o tre passaggi che contano. Scegliere la tecnologia prima di questo è il modo più rapido per costruire bene la cosa sbagliata.',
+  },
+  {
+    title: 'Costruire',
+    body: 'Interfaccia e sistema insieme, non in due appalti separati. Il contratto fra le due parti lo scrivo pensando a chi lo consumerà, che di solito sono io il giorno dopo.',
+  },
+  {
+    title: 'Consegnare',
+    body: 'Online, con il dominio giusto e un modo per aggiornarlo. Un progetto finito e mai messo in produzione non è finito.',
+  },
+];
+---
+
+<!--
+  Numerare qui ha senso: sono fasi in sequenza, l'ordine è informazione e non
+  decorazione. Se fossero tre servizi paralleli, i numeri sarebbero una bugia.
+-->
+<section id="metodo" class="mx-auto max-w-6xl border-t border-mist py-20 md:py-28">
+  <h2 class="font-mono text-xs tracking-[0.24em] text-olive uppercase" data-appear>Come lavoro</h2>
+
+  <div class="mt-12 grid gap-px overflow-hidden border border-mist bg-mist md:grid-cols-3">
+    {
+      steps.map((step, index) => (
+        <div
+          class="flex flex-col gap-4 bg-paper p-7 md:p-9"
+          data-appear
+          style={`--appear-delay: ${index * 90}ms`}
+        >
+          <span class="font-mono text-sm text-olive">0{index + 1}</span>
+          <h3 class="font-display text-2xl font-bold tracking-tight md:text-3xl">{step.title}</h3>
+          <p class="leading-relaxed text-olive">{step.body}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>

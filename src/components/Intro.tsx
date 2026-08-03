@@ -144,7 +144,7 @@ export default function Intro() {
         <div
           className="absolute inset-0 opacity-70"
           style={{
-            background: 'radial-gradient(60% 50% at 50% 42%, #2a1440 0%, transparent 70%)',
+            background: 'radial-gradient(60% 50% at 50% 42%, #4a4230 0%, transparent 70%)',
           }}
         />
       </div>
@@ -178,7 +178,7 @@ export default function Intro() {
       <button
         type="button"
         onClick={finish}
-        className="absolute top-5 right-5 rounded-full border border-white/25 bg-room/60 px-4 py-2 font-mono text-xs tracking-wide text-white/70 backdrop-blur transition hover:border-cyan hover:text-cyan md:top-7 md:right-7"
+        className="absolute top-5 right-5 rounded-full border border-paper/25 bg-room/60 px-4 py-2 font-mono text-xs tracking-wide text-paper/70 backdrop-blur transition hover:border-paper hover:text-paper md:top-7 md:right-7"
       >
         Salta l’intro
       </button>
@@ -187,7 +187,7 @@ export default function Intro() {
       {origin && (
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 bg-canvas"
+          className="pointer-events-none absolute inset-0 bg-paper"
           style={{
             clipPath: revealing
               ? `circle(${origin.r}px at ${origin.x}px ${origin.y}px)`
@@ -316,7 +316,7 @@ function LinkPreview({
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(70% 70% at 78% 72%, #3fe0ff 0%, transparent 62%), radial-gradient(80% 80% at 8% 6%, #ff3da5 0%, transparent 60%), linear-gradient(150deg, #241033 0%, #0d0d11 62%)',
+              'radial-gradient(72% 68% at 76% 70%, #7e846b 0%, transparent 70%), linear-gradient(150deg, #594e36 0%, #2f2504 62%)',
           }}
         />
         {/* Poggia sul bordo inferiore, come un ritaglio incollato sulla card */}
@@ -327,12 +327,12 @@ function LinkPreview({
           height={469}
           className="pointer-events-none absolute right-2 bottom-0 h-[104px] w-auto"
         />
-        <span className="relative font-display text-[19px] leading-[1.05] font-extrabold tracking-tight text-white">
+        <span className="relative font-display text-[19px] leading-[1.05] font-extrabold tracking-tight text-paper">
           Simone
           <br />
           Potenza
         </span>
-        <span className="relative mt-1.5 font-mono text-[8.5px] tracking-[0.18em] text-cyan uppercase">
+        <span className="relative mt-1.5 font-mono text-[8.5px] tracking-[0.18em] text-mist uppercase">
           Full stack
         </span>
       </div>
@@ -350,7 +350,7 @@ function LinkPreview({
           aria-hidden="true"
           // Il cerchio attraversa sia il fondo scuro sia la parte bianca della
           // card: la salvia si vede su entrambi, un bianco o un nero no.
-          className="tap-ring pointer-events-none absolute top-1/2 left-1/2 block size-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan/50"
+          className="tap-ring pointer-events-none absolute top-1/2 left-1/2 block size-24 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sage/50"
         />
       )}
     </div>
