@@ -1,5 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import AsciiPortrait from '../components/AsciiPortrait';
+
+// Il ritaglio è già esportato alla misura esatta che serve (2x di 420px).
+// Passando per `import` di src/assets, Astro emetteva anche il master PNG da
+// 1,1 MB pur non servendolo a nessuno.
+const PORTRAIT = { src: '/simone-hero.webp', width: 840, height: 941 };
 
 // TODO: contenuti da sostituire con i tuoi dati reali.
 const stack = [
@@ -63,39 +69,60 @@ const projects = [
 
   <main class="px-6 md:px-12">
     <!-- Il sito riprende esattamente la frase con cui è stato consigliato. -->
-    <section class="mx-auto flex min-h-[78vh] max-w-6xl flex-col justify-center py-20">
-      <p
-        class="reveal font-mono text-xs tracking-[0.24em] text-bark uppercase"
-        style="--reveal-delay: 80ms"
-      >
-        Full stack developer
-      </p>
-
-      <h1
-        class="reveal mt-6 max-w-4xl font-display text-[clamp(2.6rem,7vw,5.6rem)] leading-[0.98] font-extrabold tracking-tight text-balance"
-        style="--reveal-delay: 160ms"
-      >
-        Front end, back end, e tutto quello che sta in mezzo.
-      </h1>
-
-      <p class="reveal mt-8 max-w-xl text-lg leading-relaxed text-bark" style="--reveal-delay: 260ms">
-        Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
-        tiene in piedi. Di solito la parte difficile è farli combaciare.
-      </p>
-
-      <div class="reveal mt-10 flex flex-wrap gap-3" style="--reveal-delay: 340ms">
-        <a
-          href="#progetti"
-          class="rounded-full bg-ink px-6 py-3 font-medium text-paper transition hover:bg-bark"
+    <section
+      class="mx-auto grid min-h-[80vh] max-w-6xl items-center gap-14 py-20 md:grid-cols-[1.1fr_0.9fr] md:gap-16"
+    >
+      <div>
+        <p
+          class="reveal font-mono text-xs tracking-[0.24em] text-bark uppercase"
+          style="--reveal-delay: 80ms"
         >
-          Guarda i progetti
-        </a>
-        <a
-          href="#contatti"
-          class="rounded-full border border-mist px-6 py-3 font-medium text-ink transition hover:border-ink"
+          Full stack developer
+        </p>
+
+        <h1
+          class="reveal mt-6 font-display text-[clamp(2.4rem,5.6vw,4.6rem)] leading-[0.98] font-extrabold tracking-tight text-balance"
+          style="--reveal-delay: 160ms"
         >
-          Parliamone
-        </a>
+          Front end, back end, e tutto quello che sta in mezzo.
+        </h1>
+
+        <p
+          class="reveal mt-8 max-w-xl text-lg leading-relaxed text-bark"
+          style="--reveal-delay: 260ms"
+        >
+          Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
+          tiene in piedi. Di solito la parte difficile è farli combaciare.
+        </p>
+
+        <div class="reveal mt-10 flex flex-wrap items-center gap-6" style="--reveal-delay: 340ms">
+          <a
+            href="#progetti"
+            class="rounded-full border border-mist px-6 py-3 font-medium text-ink transition hover:border-ink"
+          >
+            Guarda i progetti
+          </a>
+          <a
+            href="#contatti"
+            class="text-bark underline underline-offset-4 transition hover:text-ink"
+          >
+            Parliamone
+          </a>
+        </div>
+      </div>
+
+      <!--
+        Il pulsante sta sotto la foto, non sotto il testo: comanda l'immagine,
+        e tenerlo accanto a ciò che governa evita di doverlo spiegare.
+      -->
+      <div class="reveal justify-self-center md:justify-self-end" style="--reveal-delay: 420ms">
+        <AsciiPortrait
+          client:load
+          src={PORTRAIT.src}
+          width={PORTRAIT.width}
+          height={PORTRAIT.height}
+          alt="Simone Potenza"
+        />
       </div>
     </section>
 
