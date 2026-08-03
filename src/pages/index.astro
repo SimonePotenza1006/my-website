@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import AsciiPortrait from '../components/AsciiPortrait';
+import ThemeToggle from '../components/ThemeToggle.astro';
 
 // Il ritaglio è già esportato alla misura esatta che serve (2x di 420px).
 // Passando per `import` di src/assets, Astro emetteva anche il master PNG da
@@ -8,20 +9,27 @@ import AsciiPortrait from '../components/AsciiPortrait';
 const PORTRAIT = { src: '/simone-hero.webp', width: 840, height: 941 };
 
 // TODO: contenuti da sostituire con i tuoi dati reali.
+// Un accento per strato: i tre neon non sono decorazione, distinguono i piani.
 const stack = [
   {
     layer: 'Interfaccia',
     role: 'quello che si vede',
+    accent: 'text-fuchsia',
+    rule: 'bg-fuchsia',
     tools: ['TypeScript', 'React', 'Astro', 'Tailwind', 'Flutter'],
   },
   {
     layer: 'Logica e dati',
     role: 'quello che decide',
+    accent: 'text-cyan',
+    rule: 'bg-cyan',
     tools: ['Node.js', 'API REST', 'PostgreSQL', 'Autenticazione'],
   },
   {
     layer: 'Infrastruttura',
     role: 'quello che regge',
+    accent: 'text-lime',
+    rule: 'bg-lime',
     tools: ['Git', 'Docker', 'CI/CD', 'Deploy continuo'],
   },
 ];
@@ -56,15 +64,18 @@ const projects = [
   description="Front end, back end e tutto quello che sta in mezzo. Portfolio di Simone Potenza, full stack developer."
 >
   <header
-    class="reveal sticky top-0 z-20 flex items-center justify-between border-b border-mist bg-paper/85 px-6 py-4 backdrop-blur md:px-12"
+    class="reveal sticky top-0 z-20 flex items-center justify-between border-b border-line bg-canvas/85 px-6 py-4 backdrop-blur md:px-12"
   >
-    <span class="font-mono text-xs tracking-[0.2em] text-bark uppercase">Simone Potenza</span>
-    <a
-      href="#contatti"
-      class="font-mono text-xs tracking-[0.2em] text-bark uppercase underline-offset-4 transition hover:text-ink hover:underline"
-    >
-      Scrivimi
-    </a>
+    <span class="font-mono text-xs tracking-[0.2em] text-dim uppercase">Simone Potenza</span>
+    <div class="flex items-center gap-4">
+      <a
+        href="#contatti"
+        class="font-mono text-xs tracking-[0.2em] text-fuchsia uppercase underline-offset-4 transition hover:underline"
+      >
+        Scrivimi
+      </a>
+      <ThemeToggle />
+    </div>
   </header>
 
   <main class="px-6 md:px-12">
@@ -74,7 +85,7 @@ const projects = [
     >
       <div>
         <p
-          class="reveal font-mono text-xs tracking-[0.24em] text-bark uppercase"
+          class="reveal font-mono text-xs tracking-[0.24em] text-lime uppercase"
           style="--reveal-delay: 80ms"
         >
           Full stack developer
@@ -84,11 +95,12 @@ const projects = [
           class="reveal mt-6 font-display text-[clamp(2.4rem,5.6vw,4.6rem)] leading-[0.98] font-extrabold tracking-tight text-balance"
           style="--reveal-delay: 160ms"
         >
-          Front end, back end, e tutto quello che sta in mezzo.
+          Front end, back end, e <span class="glow text-fuchsia">tutto quello che sta in mezzo</span
+          >.
         </h1>
 
         <p
-          class="reveal mt-8 max-w-xl text-lg leading-relaxed text-bark"
+          class="reveal mt-8 max-w-xl text-lg leading-relaxed text-dim"
           style="--reveal-delay: 260ms"
         >
           Costruisco prodotti interi: l’interfaccia con cui la gente ci parla e il sistema che la
@@ -98,13 +110,13 @@ const projects = [
         <div class="reveal mt-10 flex flex-wrap items-center gap-6" style="--reveal-delay: 340ms">
           <a
             href="#progetti"
-            class="rounded-full border border-mist px-6 py-3 font-medium text-ink transition hover:border-ink"
+            class="rounded-full border border-line px-6 py-3 font-medium text-fg transition hover:border-cyan hover:text-cyan"
           >
             Guarda i progetti
           </a>
           <a
             href="#contatti"
-            class="text-bark underline underline-offset-4 transition hover:text-ink"
+            class="text-dim underline underline-offset-4 transition hover:text-fg"
           >
             Parliamone
           </a>
@@ -128,24 +140,26 @@ const projects = [
 
     <!--
       Le competenze sono impilate come lo stack vero: dall'alto ciò che si
-      vede, in fondo ciò che regge il peso. L'ordine è informazione.
+      vede, in fondo ciò che regge il peso. L'ordine è informazione, e il
+      colore distingue il piano.
     -->
-    <section class="mx-auto max-w-6xl border-t border-mist py-20">
-      <h2 class="font-mono text-xs tracking-[0.24em] text-bark uppercase">Lo stack</h2>
+    <section class="mx-auto max-w-6xl border-t border-line py-20">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-dim uppercase">Lo stack</h2>
 
       <div class="mt-10 flex flex-col">
         {
           stack.map((level) => (
-            <div class="grid gap-4 border-b border-mist py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
+            <div class="grid gap-4 border-b border-line py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
               <div>
-                <h3 class="font-display text-3xl font-bold tracking-tight md:text-4xl">
+                <span class:list={['mb-4 block h-px w-16', level.rule]} />
+                <h3 class:list={['font-display text-3xl font-bold tracking-tight md:text-4xl', level.accent]}>
                   {level.layer}
                 </h3>
-                <p class="mt-1 text-sm text-bark">{level.role}</p>
+                <p class="mt-1 text-sm text-dim">{level.role}</p>
               </div>
               <ul class="flex flex-wrap items-start gap-2 self-center">
                 {level.tools.map((tool) => (
-                  <li class="rounded-full border border-mist px-4 py-1.5 font-mono text-sm text-bark">
+                  <li class="rounded-full border border-line px-4 py-1.5 font-mono text-sm text-dim">
                     {tool}
                   </li>
                 ))}
@@ -156,22 +170,22 @@ const projects = [
       </div>
     </section>
 
-    <section id="progetti" class="mx-auto max-w-6xl border-t border-mist py-20">
-      <h2 class="font-mono text-xs tracking-[0.24em] text-bark uppercase">Progetti</h2>
+    <section id="progetti" class="mx-auto max-w-6xl border-t border-line py-20">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-dim uppercase">Progetti</h2>
 
       <div class="mt-10 flex flex-col">
         {
           projects.map((project) => (
-            <article class="group grid gap-3 border-b border-mist py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
+            <article class="group grid gap-3 border-b border-line py-8 last:border-b-0 md:grid-cols-[1fr_2fr] md:gap-10">
               <div>
-                <h3 class="font-display text-3xl font-bold tracking-tight transition group-hover:text-bark md:text-4xl">
+                <h3 class="font-display text-3xl font-bold tracking-tight transition group-hover:text-cyan md:text-4xl">
                   {project.name}
                 </h3>
-                <p class="mt-1 font-mono text-xs tracking-wider text-sage uppercase">
+                <p class="mt-1 font-mono text-xs tracking-wider text-dim uppercase">
                   {project.year} · {project.kind}
                 </p>
               </div>
-              <p class="max-w-2xl self-center text-lg leading-relaxed text-bark">
+              <p class="max-w-2xl self-center text-lg leading-relaxed text-dim">
                 {project.description}
               </p>
             </article>
@@ -180,23 +194,27 @@ const projects = [
       </div>
     </section>
 
-    <section id="contatti" class="mx-auto max-w-6xl border-t border-mist py-20">
-      <h2 class="font-mono text-xs tracking-[0.24em] text-bark uppercase">Contatti</h2>
+    <section id="contatti" class="mx-auto max-w-6xl border-t border-line py-20">
+      <h2 class="font-mono text-xs tracking-[0.24em] text-dim uppercase">Contatti</h2>
 
-      <p class="mt-8 max-w-2xl font-display text-3xl leading-tight font-bold text-balance md:text-5xl">
-        Se stai cercando qualcuno che ti costruisca la cosa intera, scrivimi.
+      <p
+        class="mt-8 max-w-2xl font-display text-3xl leading-tight font-bold text-balance md:text-5xl"
+      >
+        Se stai cercando qualcuno che ti costruisca la cosa intera, <span
+          class="glow text-cyan">scrivimi</span
+        >.
       </p>
 
       <div class="mt-10 flex flex-wrap gap-x-10 gap-y-4">
         <a
           href="mailto:simonepotenzatr@gmail.com"
-          class="text-lg text-bark underline underline-offset-4 transition hover:text-ink"
+          class="text-lg text-fuchsia underline underline-offset-4 transition hover:text-fg"
         >
           simonepotenzatr@gmail.com
         </a>
         <a
           href="https://github.com/SimonePotenza1006"
-          class="text-lg text-bark underline underline-offset-4 transition hover:text-ink"
+          class="text-lg text-fuchsia underline underline-offset-4 transition hover:text-fg"
         >
           GitHub
         </a>
@@ -204,8 +222,8 @@ const projects = [
     </section>
   </main>
 
-  <footer class="border-t border-mist px-6 py-10 md:px-12">
-    <p class="mx-auto max-w-6xl font-mono text-xs tracking-wider text-sage">
+  <footer class="border-t border-line px-6 py-10 md:px-12">
+    <p class="mx-auto max-w-6xl font-mono text-xs tracking-wider text-dim">
       Costruito con Astro. Statistiche di visita anonime, nessun cookie.
     </p>
   </footer>

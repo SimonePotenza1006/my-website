@@ -48,7 +48,13 @@ export default function AsciiPortrait({ src, width, height, alt }: Props) {
   const activeRef = useRef(false);
   const frameRef = useRef(0);
   const reducedRef = useRef(false);
-  const colorsRef = useRef({ ink: '#2f2504', paper: '#d0ddd7', mono: 'monospace' });
+  const colorsRef = useRef({
+    canvas: '#131318',
+    glyph: '#4dff9b',
+    ghostA: '#ff3da5',
+    ghostB: '#3fe0ff',
+    mono: 'monospace',
+  });
 
   /**
    * Riduce l'immagine alla risoluzione della griglia e ne estrae luminanza e
@@ -131,7 +137,7 @@ export default function AsciiPortrait({ src, width, height, alt }: Props) {
     }
 
     const { cols, rows, lum, alpha } = grid;
-    const { ink, paper, mono } = colorsRef.current;
+    const { canvas: bg, glyph: glyphColor, ghostA, ghostB, mono } = colorsRef.current;
     const cellW = w / cols;
     const cellH = h / rows;
 
@@ -143,6 +149,7 @@ export default function AsciiPortrait({ src, width, height, alt }: Props) {
     const front = p * (rows + FRONT_SOFT);
     const tear = reducedRef.current ? 0 : Math.max(0, 1 - p / 0.38);
     const jitterStep = Math.floor(now / 70);
+    const ghostShift = tear * 4;
 
     const pointer = pointerRef.current;
     const idle =
@@ -187,14 +194,27 @@ export default function AsciiPortrait({ src, width, height, alt }: Props) {
 
         // La copertura nasconde la foto; sfumandola, la foto riaffiora.
         ctx.globalAlpha = ascii;
-        ctx.fillStyle = paper;
+        ctx.fillStyle = bg;
         ctx.fillRect(x + rowShift, y, cellW + 0.6, cellH + 0.6);
 
         const shade = clamp01(1 - lum[i]!);
         const glyph = RAMP[Math.min(RAMP.length - 1, Math.floor(shade * RAMP.length))]!;
         if (glyph !== ' ') {
-          ctx.globalAlpha = ascii * Math.min(1, coverage * 1.4);
-          ctx.fillStyle = ink;
+          const strength = ascii * Math.min(1, coverage * 1.4);
+
+          // Sdoppiamento cromatico: solo durante lo strappo. Tenerlo acceso
+          // sempre triplicherebbe i disegni di testo a ogni fotogramma, e sono
+          // già quasi seimila celle.
+          if (ghostShift > 0.2) {
+            ctx.globalAlpha = strength * 0.5;
+            ctx.fillStyle = ghostA;
+            ctx.fillText(glyph, x + rowShift - ghostShift, y);
+            ctx.fillStyle = ghostB;
+            ctx.fillText(glyph, x + rowShift + ghostShift, y);
+          }
+
+          ctx.globalAlpha = strength;
+          ctx.fillStyle = glyphColor;
           ctx.fillText(glyph, x + rowShift, y);
         }
       }
@@ -209,17 +229,32 @@ export default function AsciiPortrait({ src, width, height, alt }: Props) {
   }, [draw]);
 
   // Colori e font presi dal tema: la palette resta definita in un posto solo.
-  useEffect(() => {
+  // Il canvas non si accorge da sé che il CSS è cambiato, quindi li rilegge
+  // all'evento emesso dall'interruttore chiaro/scuro.
+  const readColors = useCallback(() => {
     const styles = getComputedStyle(document.documentElement);
     const read = (name: string, fallback: string) =>
       styles.getPropertyValue(name).trim() || fallback;
     colorsRef.current = {
-      ink: read('--color-ink', '#2f2504'),
-      paper: read('--color-paper', '#d0ddd7'),
+      canvas: read('--color-canvas', '#131318'),
+      glyph: read('--color-lime', '#4dff9b'),
+      ghostA: read('--color-fuchsia', '#ff3da5'),
+      ghostB: read('--color-cyan', '#3fe0ff'),
       mono: read('--font-mono', 'ui-monospace, monospace'),
     };
-    reducedRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   }, []);
+
+  useEffect(() => {
+    readColors();
+    reducedRef.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    const onThemeChange = () => {
+      readColors();
+      kick();
+    };
+    window.addEventListener('themechange', onThemeChange);
+    return () => window.removeEventListener('themechange', onThemeChange);
+  }, [readColors, kick]);
 
   useEffect(() => {
     const image = imgRef.current;
@@ -289,12 +324,12 @@ export default function AsciiPortrait({ src, width, height, alt }: Props) {
         onClick={() => setActive((on) => !on)}
         disabled={!ready}
         aria-pressed={active}
-        className="rounded-full bg-ink px-6 py-3 font-medium text-paper transition hover:bg-bark disabled:opacity-40"
+        className="glow-box rounded-full bg-fuchsia px-6 py-3 font-medium text-canvas transition hover:opacity-90 disabled:opacity-40"
       >
         {active ? 'Rimetti a posto' : 'Scatena la magia!'}
       </button>
 
-      <p className="min-h-5 font-mono text-xs text-sage" aria-live="polite">
+      <p className="min-h-5 font-mono text-xs text-dim" aria-live="polite">
         {active ? 'Passaci sopra per rimettermi a fuoco' : ''}
       </p>
     </div>

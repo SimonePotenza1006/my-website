@@ -4,24 +4,40 @@
 @import "@fontsource-variable/geist";
 @import "@fontsource-variable/geist-mono";
 
-@theme {
-  /* --- Sito ---------------------------------------------------------------
-     Cinque colori, cinque nomi: dal più scuro al più chiaro. La palette è
-     terrosa e desaturata, quindi il contrasto lo porta la tipografia, non
-     un accento acceso. */
-  --color-ink: #2f2504; /* testo e superfici più profonde */
-  --color-bark: #594e36; /* testo secondario, pulsanti, link */
-  --color-sage: #7e846b; /* segni terziari, etichette */
-  --color-mist: #a5ae9e; /* bordi e divisori */
-  --color-paper: #d0ddd7; /* fondo pagina */
+/* Il tema si comanda a mano, non solo dal sistema: la classe la mette lo
+   script inline nel <head> prima del primo paint. */
+@custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
   --font-display: "Bricolage Grotesque Variable", "Geist Variable", sans-serif;
   --font-sans: "Geist Variable", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
 
+  /* Valori di partenza: tema chiaro. Il blocco .dark più sotto li rimappa.
+     I tre accenti qui sono versioni profonde dei neon, perché il neon puro
+     su bianco non arriva nemmeno a 2:1 di contrasto. */
+  --color-canvas: #ffffff;
+  --color-surface: #f5f5f8;
+  --color-line: #e4e4ec;
+  --color-fg: #16161c; /* antracite */
+  --color-dim: #55555f;
+
+  --color-fuchsia: #d1006b;
+  --color-cyan: #00728f;
+  --color-lime: #007a45;
+
+  /* Neon pieni, identici nei due temi: si usano solo dove sotto c'è
+     dell'antracite, quindi il contrasto è sempre garantito. */
+  --color-fuchsia-neon: #ff3da5;
+  --color-cyan-neon: #3fe0ff;
+  --color-lime-neon: #4dff9b;
+
+  /* La stanza buia dell'intro resta scura in entrambi i temi. */
+  --color-room: #0d0d11;
+
   /* --- Chat dell'intro ----------------------------------------------------
-     Fuori dalla palette di proposito: dentro la cornice c'è un telefono vero,
-     non il sito. Confonderli toglierebbe l'effetto al taglio di scena. */
+     Fuori palette di proposito: dentro la cornice c'è un telefono vero, non
+     il sito. Confonderli toglierebbe l'effetto al taglio di scena. */
   --color-chat-bg: #eae6df;
   --color-chat-panel: #f0f2f5;
   --color-chat-in: #ffffff;
@@ -32,6 +48,19 @@
   --color-chat-tick: #53bdeb;
 }
 
+.dark {
+  --color-canvas: #131318;
+  --color-surface: #1c1c23;
+  --color-line: #2c2c36;
+  --color-fg: #f4f4f8;
+  --color-dim: #9a9aa8;
+
+  /* Sull'antracite il neon pieno è leggibile, quindi accenti e neon coincidono. */
+  --color-fuchsia: #ff3da5;
+  --color-cyan: #3fe0ff;
+  --color-lime: #4dff9b;
+}
+
 html,
 body {
   height: 100%;
@@ -39,20 +68,38 @@ body {
 
 body {
   margin: 0;
-  background: var(--color-paper);
-  color: var(--color-ink);
+  background: var(--color-canvas);
+  color: var(--color-fg);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: var(--color-ink);
-  color: var(--color-paper);
+  background: var(--color-fuchsia);
+  color: var(--color-canvas);
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-cyan);
   outline-offset: 3px;
+}
+
+/* Alone al neon: acceso solo sul tema scuro, dove ha un fondo su cui brillare.
+   Sul bianco un glow colorato sporca e basta. */
+.glow {
+  text-shadow: none;
+}
+
+.dark .glow {
+  text-shadow:
+    0 0 18px color-mix(in oklab, currentColor 55%, transparent),
+    0 0 48px color-mix(in oklab, currentColor 30%, transparent);
+}
+
+.dark .glow-box {
+  box-shadow:
+    0 0 20px color-mix(in oklab, var(--color-fuchsia) 32%, transparent),
+    0 0 60px color-mix(in oklab, var(--color-fuchsia) 16%, transparent);
 }
 
 /* ---------------------------------------------------------------------------

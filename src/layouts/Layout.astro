@@ -24,7 +24,8 @@ const replayIntro = import.meta.env.DEV;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#d0ddd7" />
+    <meta name="theme-color" content="#131318" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <!-- Compare in un istante preciso della sceneggiatura: non deve caricarsi lì. -->
     <link rel="preload" as="image" href="/simone-preview.png" />
     <meta property="og:title" content={title} />
@@ -38,6 +39,23 @@ const replayIntro = import.meta.env.DEV;
       nascosta finché non compare la classe. Senza JavaScript si atterra
       direttamente sul sito.
     -->
+    <script is:inline>
+      // Il tema va deciso prima del primo paint, altrimenti si vede il lampo
+      // bianco prima che lo scuro entri in vigore.
+      (() => {
+        let stored = null;
+        try {
+          stored = localStorage.getItem('theme');
+        } catch {
+          // Storage negato: si segue il sistema.
+        }
+        const dark = stored
+          ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      })();
+    </script>
+
     <script is:inline define:vars={{ replayIntro }}>
       (() => {
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
