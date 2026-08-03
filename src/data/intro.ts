@@ -13,8 +13,8 @@ export type IntroMessage = {
 } & ({ kind: 'text'; text: string } | { kind: 'link' });
 
 export const contact = {
-  name: 'Marta',
-  initials: 'M',
+  name: 'Bro 🔥',
+  avatar: '🔥',
   status: 'online',
 } as const;
 
@@ -25,23 +25,33 @@ export const preview = {
 } as const;
 
 export const script: IntroMessage[] = [
-  { from: 'me', kind: 'text', text: 'Ciao Marta! Mi serve uno sviluppatore', pause: 600 },
-  { from: 'them', kind: 'text', text: 'Per cosa?', pause: 900 },
   {
     from: 'me',
     kind: 'text',
-    text: 'Il gestionale del negozio. Sito pubblico + la parte interna',
-    pause: 900,
+    text: 'Mi serve una mano, conosci qualche sviluppatore?',
+    pause: 600,
   },
-  { from: 'them', kind: 'text', text: 'Allora ti serve un full stack', pause: 1100 },
   {
     from: 'them',
     kind: 'text',
-    text: 'Ho la persona giusta, ci ho lavorato l’anno scorso',
+    text: 'Ti sei convinto a fare il sito web per la tua casa vacanze? 👀',
     pause: 1300,
   },
-  { from: 'them', kind: 'link', pause: 1200 },
-  { from: 'me', kind: 'text', text: 'Perfetto, guardo subito 👀', pause: 800 },
+  {
+    from: 'me',
+    kind: 'text',
+    text: 'Ahahahahahahah quella arriverà un giorno, ma ho avuto un’idea per un’applicazione mobile e voglio parlarne con un professionista!',
+    pause: 1100,
+  },
+  { from: 'them', kind: 'text', text: 'Allora conosco la persona perfetta!', pause: 1300 },
+  { from: 'them', kind: 'link', pause: 1000 },
+  {
+    from: 'them',
+    kind: 'text',
+    text: 'Dagli un colpo di telefono, magari ti sistema anche per il sito 😂',
+    pause: 1200,
+  },
+  { from: 'me', kind: 'text', text: 'Grazie mille, vedo subito!', pause: 900 },
 ];
 
 /** Respiro tra una bolla e l'inizio della successiva. */

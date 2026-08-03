@@ -88,9 +88,14 @@ export default function Intro() {
       if (cancelled) return;
       if (index >= script.length) {
         setTyping(false);
+        // Il link è risalito di due battute: prima lo si riporta sotto gli
+        // occhi, come farebbe chiunque prima di toccarlo, poi si preme.
         after(900, () => {
-          setPhase('tap');
-          after(620, cut);
+          cardRef.current?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+          after(650, () => {
+            setPhase('tap');
+            after(620, cut);
+          });
         });
         return;
       }
@@ -248,8 +253,8 @@ function ChatHeader() {
   return (
     <header className="flex h-[56px] shrink-0 items-center gap-3 bg-chat-panel px-3 text-chat-text">
       <ChevronLeft />
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-chat-brand text-[15px] font-medium text-white">
-        {contact.initials}
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-chat-brand/15 text-[18px] select-none">
+        {contact.avatar}
       </span>
       <span className="flex min-w-0 flex-col">
         <span className="truncate text-[16px] font-medium">{contact.name}</span>
